@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PG Score Checker</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; margin-top: 50px; }
+    input, button { padding: 10px; font-size: 16px; margin: 5px; }
+    #result { margin-top: 20px; font-size: 18px; font-weight: bold; }
+  </style>
+</head>
+<body>
+  <h1>PG Score Checker</h1>
+  <input type="text" id="username" placeholder="Enter username">
+  <button onclick="getPGScore()">Check</button>
+
+  <div id="result"></div>
+
+  <script>
+    async function getPGScore() {
+      const username = document.getElementById("username").value;
+      if (!username) {
+        alert("Please enter a username");
+        return;
+      }
+
+      try {
+        const res = await fetch(`/pgscore?userName=${username}`);
+        const data = await res.json();
+        if (data.PG_Score !== undefined) {
+          document.getElementById("result").innerText =
+            `User: ${data.userName} → PG Score: ${data.PG_Score}`;
+        } else {
+          document.getElementById("result").innerText = "Error: " + JSON.stringify(data);
+        }
+      } catch (err) {
+        document.getElementById("result").innerText = "Request failed!";
+      }
+    }
+  </script>
+</body>
+</html>
