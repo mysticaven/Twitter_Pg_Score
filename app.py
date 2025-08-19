@@ -83,7 +83,7 @@ def pg_score():
     # Example API call (replace with real one)
     api_url = "https://api.twitterapi.io/twitter/user/info"
     querystring = {"userName": username}
-    headers = {"X-API-Key": "857f59e1a2354af0be65433b54da1309"}
+    headers = {"X-API-Key": "sorry"}
 
     response = requests.get(api_url, params=querystring, headers=headers)
     if response.status_code != 200:
